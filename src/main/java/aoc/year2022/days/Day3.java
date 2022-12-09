@@ -62,10 +62,14 @@ public class Day3 extends Year2022 {
     }
 
     private int solution2(String[] s) {
-        return IntStream.range(0, s.length / 3)
-                .map(x -> x * 3)
-                .map(x -> getPriorities(s[x]).filter(i -> getPriorities(s[x + 1]).anyMatch(j -> j == i) && getPriorities(s[x + 2]).anyMatch(j -> j == i)).findFirst().getAsInt())
-                .sum();
+        int sum = 0;
+        int bound = s.length / 3;
+        for (int x = 0; x < bound; x++) {
+            int x1 = x * 3;
+            int asInt = getPriorities(s[x1]).filter(i -> getPriorities(s[x1 + 1]).anyMatch(j -> j == i) && getPriorities(s[x1 + 2]).anyMatch(j -> j == i)).findFirst().getAsInt();
+            sum += asInt;
+        }
+        return sum;
     }
 
     private IntStream getPriorities(String s) {

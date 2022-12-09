@@ -41,20 +41,7 @@ public class FetchInput {
         return new File("src/main/resources/" + path);
     }
 
-//    private List<String> getMatchesByXpath(String html, String xpath) {
-//        try {
-//            TagNode tagNode = new HtmlCleaner().clean(html);
-//            org.w3c.dom.Document doc = new DomSerializer(new CleanerProperties()).createDOM(tagNode);
-//
-//            XPath xpathObj = XPathFactory.newInstance().newXPath();
-//            NodeList matches = (NodeList) xpathObj.evaluate(xpath, doc, XPathConstants.NODESET);
-//            return IntStream.range(0, matches.getLength()).mapToObj(matches::item).map(Node::getTextContent).toList();
-//        } catch (Exception e) {
-//            throw new IllegalStateException(e);
-//        }
-//    }
-
-    private String clean(String file){
+    private String clean(String file) {
         return file
                 .replace("\r\n", "\n")
                 .replace("&gt;", ">");
@@ -96,6 +83,19 @@ public class FetchInput {
 //            if (!file.exists()) {
 //                writeFile(file, clean(matches.get(i)));
 //            }
+//        }
+//    }
+
+    //    private List<String> getMatchesByXpath(String html, String xpath) {
+//        try {
+//            TagNode tagNode = new HtmlCleaner().clean(html);
+//            org.w3c.dom.Document doc = new DomSerializer(new CleanerProperties()).createDOM(tagNode);
+//
+//            XPath xpathObj = XPathFactory.newInstance().newXPath();
+//            NodeList matches = (NodeList) xpathObj.evaluate(xpath, doc, XPathConstants.NODESET);
+//            return IntStream.range(0, matches.getLength()).mapToObj(matches::item).map(Node::getTextContent).toList();
+//        } catch (Exception e) {
+//            throw new IllegalStateException(e);
 //        }
 //    }
 }
