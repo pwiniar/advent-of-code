@@ -27,19 +27,20 @@ import java.util.stream.IntStream;
 public class FetchInput {
 
     private final CloseableHttpClient client;
+    private final Resource resource;
+    private final Config config;
 
-    public FetchInput() {
+    public FetchInput(Resource resource, Config config) {
         this.client = HttpClients.createDefault();
+        this.resource = resource;
+        this.config = config;
     }
 
 
     private File getFile(int day, int year) {
-        return getResource(year + "/day" + day + ".txt");
+        return resource.getResource(year + "/day" + day + ".txt");
     }
 
-    private File getResource(String path) {
-        return new File("src/main/resources/" + path);
-    }
 
     private String clean(String file) {
         return file
@@ -66,11 +67,17 @@ public class FetchInput {
     private String doRequest(String path) {
         try {
             HttpGet request = new HttpGet("https://adventofcode.com/" + path);
-            request.addHeader("Cookie", "session=53616c7465645f5ff4521e779bbc14aea44a10d8d091c7dedf0494989d885b6bea91da526e362241327350ec148046fd5cc26b2a8d5f2da730f9a9d75ec48192; Domain=.adventofcode.com; Expires=Sat, 04-Dec-2032 18:04:55 GMT; Path=/; HttpOnly; Secure");
+            request.addHeader("Cookie", String.valueOf(config.getConfigProperty("Cookie")));
             CloseableHttpResponse re = client.execute(request);
             return EntityUtils.toString(re.getEntity());
         } catch (Exception e) {
             throw new IllegalStateException(e);
+        }
+    }
+
+    public void downloadIfNotDownloaded(int day, int year) {
+        if (!resource.getResource(resource.getDayPath(year, day)).exists()) {
+            retrieveInput(day, year);
         }
     }
 

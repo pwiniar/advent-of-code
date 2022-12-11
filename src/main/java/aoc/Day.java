@@ -15,10 +15,16 @@ public abstract class Day {
     protected final int year;
     protected final int day;
 
+    private final Resource resource;
+
     public Day(int year, int day) {
         this.year = year;
         this.day = day;
-        downloadIfNotDownloaded(day, year);
+        this.resource = new Resource();
+        Config config = new Config(resource);
+        config.loadConfiguration();
+        FetchInput fetchInput = new FetchInput(resource, config);
+        fetchInput.downloadIfNotDownloaded(day, year);
     }
 
     public abstract Object example1();
@@ -38,7 +44,7 @@ public abstract class Day {
     }
 
     protected String day() {
-        return getResourceAsString(getDayPath(year, day));
+        return resource.getResourceAsString(resource.getDayPath(year, day));
     }
 
     protected Stream<String> dayStream() {
