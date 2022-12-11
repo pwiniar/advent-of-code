@@ -7,9 +7,6 @@ import java.nio.charset.Charset;
 import static org.apache.commons.io.FileUtils.readFileToString;
 
 public class Resource {
-
-    private static int example = 0;
-
     public static String getResourceAsString(String resource) {
         try {
             return readFileToString(getResource(resource), Charset.defaultCharset());
@@ -23,8 +20,7 @@ public class Resource {
     }
 
     static String getDayPath(int year, int day) {
-        boolean b = example != 0;
-        return year + (b ? "-examples" : "") + "/day" + day + (b ? "-" + example : "") + ".txt";
+        return year + "/day" + day + ".txt";
     }
 
     public static void downloadIfNotDownloaded(int day, int year) {

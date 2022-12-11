@@ -22,8 +22,6 @@ public class Day4 extends Year2022 {
     @Override
     public Object example1() {
         int res = solution1(input.split("\n"));
-
-
         Assertions.assertThat(res).isEqualTo(2);
         return res;
     }
@@ -42,13 +40,9 @@ public class Day4 extends Year2022 {
             var left = split[0].split("-");
             var right = split[1].split("-");
 
-            int[] arrLeft = Arrays.stream(left)
-                    .mapToInt(Integer::parseInt)
-                    .toArray();
+            int[] arrLeft = parsAsInt(left);
 
-            int[] arrRight = Arrays.stream(right)
-                    .mapToInt(Integer::parseInt)
-                    .toArray();
+            int[] arrRight = parsAsInt(right);
 
             if (arrLeft[0] <= arrRight[0] && arrRight[1] <= arrLeft[1] ||
                     arrRight[0] <= arrLeft[0] && arrLeft[1] <= arrRight[1]) {
@@ -61,11 +55,36 @@ public class Day4 extends Year2022 {
 
     @Override
     public Object example2() {
-        return null;
+        int res = solution2(input.split("\n"));
+        Assertions.assertThat(res).isEqualTo(4);
+        return res;
     }
 
     @Override
     public Object part2() {
-        return null;
+        return solution2(day().split("\n"));
+    }
+
+    private int solution2(String[] strings) {
+        int res = 0;
+        for (String s : strings) {
+            String[] split = s.split(",");
+            var left = split[0].split("-");
+            var right = split[1].split("-");
+            int[] arrLeft = parsAsInt(left);
+            int[] arrRight = parsAsInt(right);
+
+            if (arrLeft[0] <= arrRight[1] && arrRight[0] <= arrLeft[1]) {
+                ++res;
+
+            }
+        }
+        return res;
+    }
+
+    private static int[] parsAsInt(String[] left) {
+        return Arrays.stream(left)
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 }

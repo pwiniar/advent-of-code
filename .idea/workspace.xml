@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3c1ea734-9d3e-4658-85cd-1763c52efe03" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/aoc/year2022/days/Day4.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aoc/FetchInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aoc/FetchInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aoc/year2022/days/Day2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aoc/year2022/days/Day2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aoc/year2022/days/Day3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aoc/year2022/days/Day3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/2022/day1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/2022/day2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/2022/day3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aoc/year2022/days/Day4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aoc/year2022/days/Day4.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,15 +72,4 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/aoc/year2022/days/Day4.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
 </project>
