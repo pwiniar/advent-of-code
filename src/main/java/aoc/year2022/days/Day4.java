@@ -6,10 +6,8 @@ import org.assertj.core.api.Assertions;
 import java.util.Arrays;
 
 public class Day4 extends Year2022 {
-    public Day4() {
-        super(4);
-    }
 
+    private static final String DELIMITER = "\n";
     private final String input = """
             2-4,6-8
             2-3,4-5
@@ -19,14 +17,17 @@ public class Day4 extends Year2022 {
             2-6,4-8
             """;
 
+    public Day4() {
+        super(4);
+    }
+
+
     @Override
     public Object example1() {
         int res = solution1(input.split("\n"));
         Assertions.assertThat(res).isEqualTo(2);
         return res;
     }
-
-
 
     @Override
     public Object part1() {
@@ -35,17 +36,11 @@ public class Day4 extends Year2022 {
 
     private int solution1(String[] strings) {
         int res = 0;
-        for (String s : strings) {
-            String[] split = s.split(",");
-            var left = split[0].split("-");
-            var right = split[1].split("-");
+        for (String line : strings) {
+            LineAsArray lineAsArray = lineAsArray(line);
 
-            int[] arrLeft = parsAsInt(left);
-
-            int[] arrRight = parsAsInt(right);
-
-            if (arrLeft[0] <= arrRight[0] && arrRight[1] <= arrLeft[1] ||
-                    arrRight[0] <= arrLeft[0] && arrLeft[1] <= arrRight[1]) {
+            if (lineAsArray.leftArr[0] <= lineAsArray.rightArr[0] && lineAsArray.rightArr[1] <= lineAsArray.leftArr[1] ||
+                    lineAsArray.rightArr[0] <= lineAsArray.leftArr[0] && lineAsArray.leftArr[1] <= lineAsArray.rightArr[1]) {
                 ++res;
 
             }
@@ -55,26 +50,22 @@ public class Day4 extends Year2022 {
 
     @Override
     public Object example2() {
-        int res = solution2(input.split("\n"));
+
+        int res = solution2(input.split(DELIMITER));
         Assertions.assertThat(res).isEqualTo(4);
         return res;
     }
 
     @Override
     public Object part2() {
-        return solution2(day().split("\n"));
+        return solution2(day().split(DELIMITER));
     }
 
     private int solution2(String[] strings) {
         int res = 0;
-        for (String s : strings) {
-            String[] split = s.split(",");
-            var left = split[0].split("-");
-            var right = split[1].split("-");
-            int[] arrLeft = parsAsInt(left);
-            int[] arrRight = parsAsInt(right);
-
-            if (arrLeft[0] <= arrRight[1] && arrRight[0] <= arrLeft[1]) {
+        for (String line : strings) {
+            LineAsArray lineAsArray = lineAsArray(line);
+            if (lineAsArray.leftArr[0] <= lineAsArray.rightArr[1] && lineAsArray.rightArr[0] <= lineAsArray.leftArr[1]) {
                 ++res;
 
             }
@@ -87,4 +78,20 @@ public class Day4 extends Year2022 {
                 .mapToInt(Integer::parseInt)
                 .toArray();
     }
+
+    private LineAsArray lineAsArray(String input) {
+        String[] split = input.split(",");
+        String delimiter = "-";
+        var left = split[0].split(delimiter);
+        var right = split[1].split(delimiter);
+
+        int[] arrLeft = parsAsInt(left);
+        int[] arrRight = parsAsInt(right);
+        return new LineAsArray(arrLeft, arrRight);
+    }
+
+    public record LineAsArray(int[] leftArr, int[] rightArr) {
+    }
+
+
 }

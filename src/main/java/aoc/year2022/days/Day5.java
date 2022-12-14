@@ -1,6 +1,7 @@
 package aoc.year2022.days;
 
 import aoc.year2022.Year2022;
+import org.assertj.core.api.Assertions;
 
 import java.util.Arrays;
 import java.util.stream.LongStream;
@@ -25,6 +26,8 @@ public class Day5 extends Year2022 {
 
     @Override
     public Object example1() {
+
+//        Assertions.assertThat()
         return super.example1();
     }
 

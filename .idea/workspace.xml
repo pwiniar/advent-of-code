@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3c1ea734-9d3e-4658-85cd-1763c52efe03" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/aoc/Config.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/aoc/DaysExecutor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/aoc/year2022/days/Day5.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aoc/Day.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aoc/Day.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aoc/FetchInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aoc/FetchInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aoc/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aoc/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aoc/Resource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aoc/Resource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aoc/year2022/days/Day5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aoc/year2022/days/Day5.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,13 +39,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/Winiar/Documents/idea_workspace/kafka-workshop"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="aoc.year2022.days" />
