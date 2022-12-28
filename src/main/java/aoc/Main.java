@@ -11,6 +11,5 @@ public class Main {
 
     public static void main(String[] args) {
         new DaysExecutor().execute("aoc.year2022.days");
-
     }
 }

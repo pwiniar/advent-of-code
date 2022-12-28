@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Integer.reverse;
 
 public class Day5 extends Year2022 {
     private static final String EXAMPLE = """
@@ -71,7 +72,7 @@ public class Day5 extends Year2022 {
 
     @Override
     public Object part2() {
-        var parts = EXAMPLE.split("\n\n");
+        var parts = day().split("\n\n");
         var stackPart = parts[0];
         var movePart = parts[1];
         var initialStack = stackHandler.parseStack(stackPart);
@@ -79,7 +80,6 @@ public class Day5 extends Year2022 {
         var moves = moveHandler.parseMoves(movePart);
         var res = stackHandler.getTopCrates(stackHandler.move2(moves, initialStack));
 
-        Assertions.assertThat(res).isEqualTo("MCD");
         return res;
     }
 
@@ -137,24 +137,17 @@ public class Day5 extends Year2022 {
         }
 
         public Map<Integer, Deque<Character>> move2(List<Move> moves, Map<Integer, Deque<Character>> initialStack) {
-            System.out.println(initialStack);
             moves.forEach(move -> {
-
-                System.out.println(move);
                 Deque<Character> from = initialStack.get(move.fromStackNumber());
                 Deque<Character> to = initialStack.get(move.toStackNumber());
-                if (move.numberOfBoxes == 3) {
-                    for (int i = 0; i < move.numberOfBoxes(); i++) {
-                        Character topOne = from.pollFirst();
-                        to.addLast(topOne);
-                    }
-                } else {
-                    for (int i = 0; i < move.numberOfBoxes(); i++) {
-                        Character topOne = from.pollFirst();
-                        to.addFirst(topOne);
-                    }
+
+                Character[] tem = new Character[move.numberOfBoxes];
+                for (int i = 0; i < move.numberOfBoxes(); i++) {
+                    tem[i] = from.pollFirst();
                 }
-                System.out.println(initialStack);
+                for (int i = tem.length - 1; i >= 0; i--) {
+                    to.addFirst(tem[i]);
+                }
             });
 
             return initialStack;
