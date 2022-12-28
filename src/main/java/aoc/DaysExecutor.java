@@ -28,6 +28,7 @@ public class DaysExecutor {
         InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(packageName.replaceAll("[.]", "/"));
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
         return reader.lines()
+                .filter(line -> !line.contains("$"))
                 .filter(line -> line.endsWith(".class"))
                 .map(line -> getClass(line, packageName))
                 .collect(Collectors.toSet()).size();
