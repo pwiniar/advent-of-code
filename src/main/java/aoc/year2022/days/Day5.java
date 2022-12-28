@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
-import static java.lang.Integer.reverse;
 
 public class Day5 extends Year2022 {
     private static final String EXAMPLE = """
@@ -37,7 +36,7 @@ public class Day5 extends Year2022 {
         var initialStack = stackHandler.parseStack(stackPart);
 
         var moves = moveHandler.parseMoves(movePart);
-        var res = stackHandler.getTopCrates(stackHandler.move(moves, initialStack));
+        var res = stackHandler.getTopCrates(stackHandler.move9000(moves, initialStack));
 
         Assertions.assertThat(res).isEqualTo("CMZ");
         return res;
@@ -51,7 +50,9 @@ public class Day5 extends Year2022 {
         var initialStack = stackHandler.parseStack(stackPart);
 
         var moves = moveHandler.parseMoves(movePart);
-        var res = stackHandler.getTopCrates(stackHandler.move(moves, initialStack));
+        var res = stackHandler.getTopCrates(stackHandler.move9000(moves, initialStack));
+
+        Assertions.assertThat(res).isEqualTo("FWNSHLDNZ");
 
         return res;
     }
@@ -64,7 +65,7 @@ public class Day5 extends Year2022 {
         var initialStack = stackHandler.parseStack(stackPart);
 
         var moves = moveHandler.parseMoves(movePart);
-        var res = stackHandler.getTopCrates(stackHandler.move2(moves, initialStack));
+        var res = stackHandler.getTopCrates(stackHandler.move9001(moves, initialStack));
 
         Assertions.assertThat(res).isEqualTo("MCD");
         return res;
@@ -78,8 +79,9 @@ public class Day5 extends Year2022 {
         var initialStack = stackHandler.parseStack(stackPart);
 
         var moves = moveHandler.parseMoves(movePart);
-        var res = stackHandler.getTopCrates(stackHandler.move2(moves, initialStack));
+        var res = stackHandler.getTopCrates(stackHandler.move9001(moves, initialStack));
 
+        Assertions.assertThat(res).isEqualTo("RNRGDNFQG");
         return res;
     }
 
@@ -103,14 +105,14 @@ public class Day5 extends Year2022 {
 
         private static void whenAbsent(Map<Integer, Deque<Character>> deque, int i, char letter) {
             Deque<Character> val = new ArrayDeque<>();
-            val.add(letter);
+            val.addLast(letter);
             deque.putIfAbsent(i + 1, val);
         }
 
         private static void whenPresent(Map<Integer, Deque<Character>> deque, int i, char letter) {
             deque.computeIfPresent(i + 1, (integer, characters) -> {
                 Deque<Character> de = new ArrayDeque<>(characters);
-                de.add(letter);
+                de.addLast(letter);
                 return de;
             });
         }
@@ -123,7 +125,7 @@ public class Day5 extends Year2022 {
                     .collect(Collectors.joining());
         }
 
-        public Map<Integer, Deque<Character>> move(List<Move> moves, Map<Integer, Deque<Character>> initialStack) {
+        public Map<Integer, Deque<Character>> move9000(List<Move> moves, Map<Integer, Deque<Character>> initialStack) {
             moves.forEach(move -> {
                 Deque<Character> from = initialStack.get(move.fromStackNumber());
                 Deque<Character> to = initialStack.get(move.toStackNumber());
@@ -136,18 +138,19 @@ public class Day5 extends Year2022 {
             return initialStack;
         }
 
-        public Map<Integer, Deque<Character>> move2(List<Move> moves, Map<Integer, Deque<Character>> initialStack) {
+        public Map<Integer, Deque<Character>> move9001(List<Move> moves, Map<Integer, Deque<Character>> initialStack) {
             moves.forEach(move -> {
                 Deque<Character> from = initialStack.get(move.fromStackNumber());
                 Deque<Character> to = initialStack.get(move.toStackNumber());
 
-                Character[] tem = new Character[move.numberOfBoxes];
+                List<Character> tem = new ArrayList<>(move.numberOfBoxes);
                 for (int i = 0; i < move.numberOfBoxes(); i++) {
-                    tem[i] = from.pollFirst();
+                    tem.add(from.pollFirst());
                 }
-                for (int i = tem.length - 1; i >= 0; i--) {
-                    to.addFirst(tem[i]);
-                }
+
+                Collections.reverse(tem);
+                tem.forEach(to::addFirst);
+
             });
 
             return initialStack;
