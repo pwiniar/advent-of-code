@@ -4,7 +4,6 @@ import aoc.year2022.Year2022;
 import org.assertj.core.api.Assertions;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class Day7 extends Year2022 {
@@ -43,7 +42,7 @@ public class Day7 extends Year2022 {
     public Object example1() {
         String[] split = INPUT.split("\n");
         List<String> filteredData = removeUnnecessaryCommands(split);
-        var node = parseActions(filteredData);
+        var node = processCommands(filteredData);
         long res = solution1(node);
         Assertions.assertThat(res).isEqualTo(95437);
         return res;
@@ -52,9 +51,7 @@ public class Day7 extends Year2022 {
     @Override
     public Object part1() {
         String[] split = day().split("\n");
-        List<String> filteredData = removeUnnecessaryCommands(split);
-        var node = parseActions(filteredData);
-        long res = solution1(node);
+        long res = solution1(processCommands(removeUnnecessaryCommands(split)));
         Assertions.assertThat(res).isEqualTo(1915606);
         return res;
     }
@@ -72,41 +69,11 @@ public class Day7 extends Year2022 {
     private static long solution1(Node node) {
         return node.dirs()
                 .filter(n -> n.size() <= 100000)
-                .mapToLong(n -> n.size()).sum();
+                .mapToLong(Node::size)
+                .sum();
     }
 
-    private static class Node {
-        private final String name;
-        private final Node parent;
-        boolean isDirectory;
-        private long size;
-        private final Map<String, Node> children = new HashMap<>();
-
-        public Node(String name, Node parent, boolean isDirectory) {
-            this.name = name;
-            this.parent = parent;
-            this.isDirectory = isDirectory;
-        }
-
-        public void addChild(Node n) {
-            children.put(n.name, n);
-        }
-
-        public void addSize(long size) {
-            this.size += size;
-        }
-
-        Stream<Node> dirs() {
-            return Stream.concat(Stream.of(this), children.values().stream().flatMap(n -> n.dirs())
-                    .filter(n -> n.size == 0));
-        }
-
-        public long size() {
-            return size > 0 ? size : children.values().stream().mapToLong(n -> n.size()).sum();
-        }
-    }
-
-    private Node parseActions(List<String> commands) {
+    private Node processCommands(List<String> commands) {
         var root = new Node("/", null, true);
         var currentNode = root;
 
@@ -152,5 +119,41 @@ public class Day7 extends Year2022 {
                 .skip(1)
                 .filter(val -> !val.equals("$ ls"))
                 .toList();
+    }
+
+    private static class Node {
+        private final String name;
+        private final Node parent;
+        boolean isDirectory;
+        private long size;
+        private final Map<String, Node> children = new HashMap<>();
+
+        public Node(String name, Node parent, boolean isDirectory) {
+            this.name = name;
+            this.parent = parent;
+            this.isDirectory = isDirectory;
+        }
+
+        public void addChild(Node n) {
+            children.put(n.name, n);
+        }
+
+        public void addSize(long size) {
+            this.size += size;
+        }
+
+        public Stream<Node> dirs() {
+            return Stream.concat(Stream.of(this), children.values()
+                    .stream()
+                    .flatMap(Node::dirs)
+                    .filter(n -> n.isDirectory));
+        }
+
+        public long size() {
+            return size > 0 ? size : children.values()
+                    .stream()
+                    .mapToLong(Node::size)
+                    .sum();
+        }
     }
 }
